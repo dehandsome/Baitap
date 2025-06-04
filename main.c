@@ -1,32 +1,31 @@
-<<<<<<< HEAD
-#include"sensor_manager.h"
-int main(){
-     Sensor_Manager* sensor_manager =created_SensorManagerInstance();
-      add_Sensor(sensor_manager,101);
-      add_Sensor(sensor_manager,102);
-      add_Sensor(sensor_manager,103);
+#include <stdio.h>
+#include <stdlib.h>
+#include "sensor-factory/sensor-factory.h"
 
-      list_Senssors(sensor_manager);
-      collect_SensorData(sensor_manager);
-      upload_SensorData(sensor_manager);
-      remove_Sensor(sensor_manager,102);
-      list_Senssors(sensor_manager);
-      destroy_SensorManager();
-      return 0 ;
-=======
-#include"sensor_manager.h"
-int main(){
-     Sensor_Manager* sensor_manager =created_SensorManagerInstance();
-      add_Sensor(sensor_manager,101);
-      add_Sensor(sensor_manager,102);
-      add_Sensor(sensor_manager,103);
+int main() {
+    // Create a temperature sensor
+    Sensor* tempSensor = createSensor(SENSOR_TEMPERATURE);
+    if (tempSensor != NULL) {
+        tempSensor->init();
+        printf("Temperature: %.2f°C\n", tempSensor->readData());
+        free(tempSensor);
+    }
 
-      list_Senssors(sensor_manager);
-      collect_SensorData(sensor_manager);
-      upload_SensorData(sensor_manager);
-      remove_Sensor(sensor_manager,102);
-      list_Senssors(sensor_manager);
-      destroy_SensorManager();
-      return 0 ;
->>>>>>> 04db0b39fbbafbe5b55c0d742a7e5dd09ec37aa1
+    // Create a humidity sensor
+    Sensor* humiditySensor = createSensor(SENSOR_HUMIDITY);
+    if (humiditySensor != NULL) {
+        humiditySensor->init();
+        printf("Humidity: %.2f%%\n", humiditySensor->readData());
+        free(humiditySensor);
+    }
+
+    // Create a light sensor
+    Sensor* lightSensor = createSensor(SENSOR_LIGHT);
+    if (lightSensor != NULL) {
+        lightSensor->init();
+        printf("Light Intensity: %.2f lux\n", lightSensor->readData());
+        free(lightSensor);
+    }
+
+    return 0;
 }
